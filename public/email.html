@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSR EV TECH</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  background: #0b0b0b;
+  overflow: hidden;
+}
+
+/* GRID BACKGROUND */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,102,0,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,102,0,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ORANGE GLOW */
+body::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,102,0,0.25), transparent);
+  right: -100px;
+  top: 100px;
+  filter: blur(80px);
+}
+
+/* CONTAINER */
+.container {
+  width: 350px;
+  padding: 35px;
+  border-radius: 16px;
+  background: rgba(20, 20, 20, 0.9);
+  backdrop-filter: blur(12px);
+  text-align: center;
+  border: 1px solid rgba(255,102,0,0.2);
+  box-shadow: 0 0 30px rgba(255,102,0,0.15);
+  z-index: 2;
+}
+
+/* TITLE */
+h3 {
+  color: #ff6600;
+  letter-spacing: 1px;
+}
+
+/* ICON */
+.icon {
+  font-size: 55px;
+  margin: 15px 0;
+  color: #ff6600;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: white;
+  margin: 15px 0;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 10px rgba(255,102,0,0.6);
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff6600, #ff3300);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,102,0,0.7);
+}
+
+/* MESSAGE */
+#msg {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ff6600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h3>JSR EV TECH</h3>
+
+  <div class="icon">
+    <i class="fa-solid fa-envelope"></i>
+  </div>
+
+  <form onsubmit="event.preventDefault(); sendOTP();">
+
+    <input type="email" id="email" placeholder="Enter your email" required>
+
+    <button class="btn" type="submit">SEND OTP</button>
+
+  </form>
+
+  <p id="msg"></p>
+</div>
+
+<script>
+async function sendOTP() {
+  const email = document.getElementById("email").value;
+
+  const res = await fetch("/send-otp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email })
+  });
+
+  const data = await res.json();
+  document.getElementById("msg").innerText = data.message;
+
+  if (data.success) {
+    localStorage.setItem("email", email);
+    setTimeout(() => {
+      window.location.href = "otp.html";
+    }, 1000);
+  }
+}
+</script>
+
+</body>
+</html>
