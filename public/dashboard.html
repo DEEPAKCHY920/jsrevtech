@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="JSR EV Tech is a trusted supplier of genuine E-Rickshaw spare parts in India including batteries, motors, tyres and chargers. Fast delivery and best prices.">
+<meta name="keywords" content="e rickshaw parts, e rickshaw battery, ev spare parts, motor, e rickshaw motor, e rickshaw charger, e rickshaw tyres, EV spare parts India, JSR EV Tech, JBMR E RICKSHAW, ROHINI, e rickshaw repair">
+<meta name="author" content="JSR EV Tech">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.jsrevtech.in/">
+<title>JSR EV TECH — E-Rickshaw Spare Parts</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --orange:#F55B00;--orange-light:#FF7A2F;--green:#1DB954;
+  --black:#0D0D0D;--dark:#141414;--dark2:#1C1C1C;--dark3:#262626;
+  --white:#F4F0E8;--muted:#888;--muted2:#555;
+  --font-head:'Rajdhani',sans-serif;--font-body:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;}
+
+/* SCROLL PROGRESS */
+#scroll-bar{
+  position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;
+  background:linear-gradient(90deg,var(--orange),var(--orange-light),#FFB347);
+  box-shadow:0 0 12px rgba(245,91,0,0.7);transition:width 0.06s linear;
+}
+
+/* SIDE DOTS */
+#side-dots{
+  position:fixed;right:1.8rem;top:50%;transform:translateY(-50%);
+  z-index:80;display:flex;flex-direction:column;gap:0.75rem;
+  opacity:0;transition:opacity 0.4s;
+}
+#side-dots.show{opacity:1;}
+.sdot{
+  width:6px;height:6px;border-radius:50%;background:var(--muted2);
+  cursor:pointer;transition:background 0.3s,height 0.35s,border-radius 0.35s;
+}
+.sdot.on{background:var(--orange);height:22px;border-radius:3px;}
+.sdot:hover{background:var(--white);}
+
+/* CURSOR */
+.cursor-glow{
+  position:fixed;width:500px;height:500px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,rgba(245,91,0,0.055) 0%,transparent 65%);
+  transform:translate(-50%,-50%);will-change:left,top;
+}
+
+/* PARTICLES */
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3rem;border-bottom:1px solid transparent;
+  transition:background 0.5s,border-color 0.5s,padding 0.4s,backdrop-filter 0.5s;
+}
+nav.scrolled{background:rgba(13,13,13,0.96);border-bottom-color:var(--dark3);backdrop-filter:blur(16px);padding:0.7rem 3rem;}
+.nav-logo{display:flex;align-items:center;gap:0.8rem;text-decoration:none;}
+.logo-icon{
+  width:38px;height:38px;background:var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);font-weight:700;font-size:0.9rem;color:#fff;
+  clip-path:polygon(10% 0%,90% 0%,100% 10%,100% 90%,90% 100%,10% 100%,0% 90%,0% 10%);
+  animation:logoSpin 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+}
+@keyframes logoSpin{from{transform:rotate(-180deg) scale(0);opacity:0;}to{transform:none;opacity:1;}}
+.logo-text{font-family:var(--font-head);font-size:1.4rem;font-weight:700;letter-spacing:0.1em;color:var(--white);}
+.logo-text span{color:var(--orange);}
+.logo-sub{font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.75rem;letter-spacing:0.08em;color:var(--muted);text-decoration:none;transition:color 0.25s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--orange);transform:scaleX(0);transform-origin:right;transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);}
+.nav-links a:hover,.nav-links a.on{color:var(--white);}
+.nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1);transform-origin:left;}
+.nav-cta{background:var(--orange);color:#fff!important;font-family:var(--font-head);font-size:0.85rem;font-weight:600;letter-spacing:0.08em;padding:0.5rem 1.4rem;text-decoration:none;transition:background 0.2s,transform 0.2s,box-shadow 0.2s!important;position:relative;overflow:hidden;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.15) 50%,transparent 70%);transform:translateX(-100%);transition:transform 0.5s ease;}
+.nav-cta:hover::before{transform:translateX(100%);}
+.nav-cta:hover{background:var(--orange-light)!important;transform:translateY(-2px)!important;box-shadow:0 8px 24px rgba(245,91,0,0.35)!important;}
+.nav-cta::after{display:none!important;}
+
+/* HERO */
+.hero{min-height:100vh;padding:7rem 3rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 80% 50%,rgba(245,91,0,0.07) 0%,transparent 60%);pointer-events:none;}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(245,91,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,91,0,0.04) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 22s linear infinite;will-change:background-position;}
+@keyframes gridDrift{from{background-position:0 0;}to{background-position:60px 60px;}}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(245,91,0,0.12);border:1px solid rgba(245,91,0,0.3);padding:0.35rem 1rem;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);margin-bottom:1.5rem;animation:fadeDown 0.7s ease 0.2s both;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-24px);}to{opacity:1;transform:none;}}
+.badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(29,185,84,0.6);}50%{box-shadow:0 0 0 8px rgba(29,185,84,0);}}
+h1.hero-title{font-family:var(--font-head);font-size:clamp(3rem,5.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:0.02em;margin-bottom:1.2rem;overflow:hidden;}
+h1.hero-title span{color:var(--orange);}
+.title-line{display:block;animation:titleSlide 1s cubic-bezier(0.16,1,0.3,1) both;}
+.title-line:nth-child(1){animation-delay:0.35s;}
+.title-line:nth-child(2){animation-delay:0.55s;}
+@keyframes titleSlide{from{opacity:0;transform:translateY(70px) skewY(4deg);}to{opacity:1;transform:none;}}
+.hero-desc{font-size:0.82rem;line-height:1.9;color:var(--muted);max-width:460px;margin-bottom:2.5rem;animation:fadeUp 0.8s ease 0.9s both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.8s ease 1.05s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
+.hero-trust{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--dark3);flex-wrap:wrap;animation:fadeUp 0.8s ease 1.2s both;}
+.trust-item{display:flex;flex-direction:column;}
+.trust-num{font-family:var(--font-head);font-size:1.8rem;font-weight:700;color:var(--orange);line-height:1;}
+.trust-label{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem;}
+
+/* BUTTONS */
+.btn-main{font-family:var(--font-head);font-size:1rem;font-weight:600;letter-spacing:0.08em;text-decoration:none;background:var(--orange);color:#fff;padding:0.85rem 2.2rem;transition:background 0.2s,transform 0.25s,box-shadow 0.25s;display:inline-block;position:relative;overflow:hidden;}
+.btn-main::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.55s,height 0.55s;}
+.btn-main:hover::before{width:340px;height:340px;}
+.btn-main:hover{background:var(--orange-light);transform:translateY(-3px);box-shadow:0 14px 36px rgba(245,91,0,0.4);}
+.btn-outline{font-family:var(--font-head);font-size:1rem;font-weight:600;letter-spacing:0.08em;text-decoration:none;border:1px solid var(--dark3);color:var(--muted);padding:0.85rem 2.2rem;transition:border-color 0.25s,color 0.25s,transform 0.25s;display:inline-block;}
+.btn-outline:hover{border-color:var(--white);color:var(--white);transform:translateY(-3px);}
+
+/* HERO VISUAL */
+.hero-right{animation:heroIn 1s cubic-bezier(0.16,1,0.3,1) 0.4s both;}
+@keyframes heroIn{from{opacity:0;transform:translateX(50px);}to{opacity:1;transform:none;}}
+.hero-visual{background:var(--dark2);border:1px solid var(--dark3);padding:2rem;position:relative;overflow:hidden;}
+.hero-visual::before{content:'E-RICKSHAW';position:absolute;top:-10px;right:-10px;font-family:var(--font-head);font-size:4.5rem;font-weight:700;color:rgba(245,91,0,0.04);letter-spacing:0.1em;white-space:nowrap;pointer-events:none;}
+.hero-visual::after{content:'';position:absolute;top:-2px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);animation:scan 3s ease-in-out infinite;}
+@keyframes scan{0%{top:-2px;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{top:calc(100% + 2px);opacity:0;}}
+.parts-preview{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--dark3);}
+.part-preview-card{background:var(--dark);padding:1.5rem 1.2rem;display:flex;flex-direction:column;gap:0.5rem;transition:background 0.2s,transform 0.25s;cursor:default;animation:cardPop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;}
+.part-preview-card:nth-child(1){animation-delay:0.75s;}
+.part-preview-card:nth-child(2){animation-delay:0.9s;}
+.part-preview-card:nth-child(3){animation-delay:1.05s;}
+.part-preview-card:nth-child(4){animation-delay:1.2s;}
+@keyframes cardPop{from{opacity:0;transform:scale(0.75);}to{opacity:1;transform:none;}}
+.part-preview-card:hover{background:var(--dark2);transform:scale(1.05);}
+.part-icon{font-size:1.8rem;line-height:1;transition:transform 0.3s;}
+.part-preview-card:hover .part-icon{transform:scale(1.2) rotate(-6deg);}
+.part-name{font-family:var(--font-head);font-size:1.05rem;font-weight:700;letter-spacing:0.05em;}
+.part-count{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);}
+
+/* TICKER */
+.ticker{background:var(--orange);padding:0.7rem 0;overflow:hidden;white-space:nowrap;position:relative;}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:1;}
+.ticker::before{left:0;background:linear-gradient(90deg,var(--orange),transparent);}
+.ticker::after{right:0;background:linear-gradient(-90deg,var(--orange),transparent);}
+.ticker-inner{display:inline-block;animation:tickAnim 22s linear infinite;font-family:var(--font-head);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;font-weight:600;}
+.ticker:hover .ticker-inner{animation-play-state:paused;}
+@keyframes tickAnim{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* SCROLL MARQUEE */
+.sc-marquee{overflow:hidden;padding:1.8rem 0;border-top:1px solid var(--dark3);border-bottom:1px solid var(--dark3);background:var(--dark);}
+.sc-marquee-row{display:flex;width:max-content;align-items:center;}
+.sc-word{font-family:var(--font-head);font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:700;letter-spacing:0.06em;color:transparent;-webkit-text-stroke:1px var(--dark3);padding:0 1.5rem;transition:color 0.3s,-webkit-text-stroke 0.3s;white-space:nowrap;cursor:default;}
+.sc-word.hl{-webkit-text-stroke:1px rgba(245,91,0,0.28);}
+.sc-word:hover{color:var(--orange);-webkit-text-stroke:1px var(--orange);}
+
+/* PARTS SECTION */
+.section-parts{padding:6rem 3rem;position:relative;}
+.section-tag{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--orange);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.8rem;}
+.section-tag::before{content:'';display:block;width:0;height:2px;background:var(--orange);transition:width 0.65s cubic-bezier(0.16,1,0.3,1);}
+.section-tag.tag-on::before{width:30px;}
+.section-title{font-family:var(--font-head);font-size:clamp(2rem,4vw,3.2rem);font-weight:700;letter-spacing:0.03em;line-height:1.1;margin-bottom:3rem;}
+.section-title span{color:var(--orange);}
+
+/* word reveal */
+.wr{display:inline-block;opacity:0;transform:translateY(38px) rotate(2deg);transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1);}
+.wr.on{opacity:1;transform:none;}
+
+.parts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+
+/* clip-path wipe */
+.clip-card{clip-path:inset(0 100% 0 0);transition:clip-path 0.9s cubic-bezier(0.16,1,0.3,1);}
+.clip-card.on{clip-path:inset(0 0% 0 0);}
+
+.part-card{background:var(--dark2);border:1px solid var(--dark3);padding:2rem;position:relative;overflow:hidden;transition:border-color 0.35s,transform 0.35s,box-shadow 0.35s;}
+.part-card:hover{border-color:var(--orange);box-shadow:0 22px 55px rgba(245,91,0,0.13);}
+.part-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange-light));transform:scaleX(0);transform-origin:left;transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);}
+.part-card:hover::after{transform:scaleX(1);}
+.part-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(245,91,0,0.06),transparent 70%);opacity:0;transition:opacity 0.4s;pointer-events:none;}
+.part-card:hover::before{opacity:1;}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem;}
+.pc-icon{width:50px;height:50px;background:rgba(245,91,0,0.1);display:flex;align-items:center;justify-content:center;font-size:1.6rem;transition:background 0.3s,transform 0.4s;}
+.part-card:hover .pc-icon{background:rgba(245,91,0,0.22);transform:rotate(-10deg) scale(1.12);}
+.pc-tag{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;background:rgba(29,185,84,0.12);color:var(--green);padding:0.3rem 0.7rem;border:1px solid rgba(29,185,84,0.2);animation:tagBlink 3s ease-in-out infinite;}
+@keyframes tagBlink{0%,100%{opacity:1;}50%{opacity:0.5;}}
+.pc-title{font-family:var(--font-head);font-size:1.5rem;font-weight:700;letter-spacing:0.05em;margin-bottom:0.6rem;}
+.pc-desc{font-size:0.75rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;}
+.pc-items{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;}
+.pc-item{font-size:0.62rem;letter-spacing:0.08em;background:var(--dark3);color:var(--muted);padding:0.3rem 0.7rem;transition:background 0.25s,color 0.25s;}
+.part-card:hover .pc-item{background:rgba(245,91,0,0.09);color:var(--white);}
+.pc-link{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-head);font-size:0.85rem;font-weight:600;color:var(--orange);text-decoration:none;letter-spacing:0.05em;transition:gap 0.35s,color 0.2s;}
+.pc-link:hover{gap:1.3rem;color:var(--orange-light);}
+
+/* BOLT */
+.bolt-sep{display:flex;align-items:center;justify-content:center;padding:2rem;gap:1rem;}
+.bolt-line{flex:1;height:1px;background:var(--dark3);}
+.bolt-icon{font-size:1.2rem;color:var(--orange);animation:boltFlash 1.6s ease-in-out infinite;}
+@keyframes boltFlash{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.75);}}
+
+/* ABOUT */
+.section-about{padding:6rem 3rem;background:var(--dark2);border-top:1px solid var(--dark3);border-bottom:1px solid var(--dark3);position:relative;overflow:hidden;}
+.about-bg-word{position:absolute;top:50%;left:-2%;font-family:var(--font-head);font-size:clamp(7rem,16vw,16rem);font-weight:700;color:rgba(245,91,0,0.025);white-space:nowrap;pointer-events:none;transform:translateY(-50%);letter-spacing:0.05em;will-change:transform;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+.about-body{font-size:0.8rem;line-height:2.1;color:var(--muted);margin-bottom:1rem;}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;}
+.af-item{background:var(--dark3);padding:1.2rem;border-left:2px solid var(--orange);transition:background 0.3s,transform 0.35s,box-shadow 0.3s;}
+.af-item:hover{background:rgba(245,91,0,0.09);transform:translateX(6px);box-shadow:-4px 0 20px rgba(245,91,0,0.08);}
+.af-title{font-family:var(--font-head);font-size:1rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.3rem;}
+.af-desc{font-size:0.65rem;color:var(--muted);line-height:1.7;}
+.about-banner{background:var(--orange);padding:2.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.about-banner::before{content:'JSR';position:absolute;right:-15px;bottom:-20px;font-family:var(--font-head);font-size:8rem;font-weight:700;color:rgba(0,0,0,0.15);line-height:1;animation:bannerFloat 5s ease-in-out infinite;}
+@keyframes bannerFloat{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-10px) rotate(-1deg);}}
+.about-banner::after{content:'';position:absolute;top:0;left:-100%;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);animation:sheen 5s ease-in-out infinite 1.5s;}
+@keyframes sheen{0%,100%{left:-100%;}60%{left:110%;}}
+.about-banner h3{font-family:var(--font-head);font-size:1.8rem;font-weight:700;color:#fff;letter-spacing:0.05em;line-height:1.2;position:relative;z-index:1;}
+.about-banner p{font-size:0.75rem;color:rgba(255,255,255,0.75);margin-top:0.5rem;position:relative;z-index:1;}
+.about-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--dark3);}
+.ab-stat{background:var(--dark);padding:1.2rem;text-align:center;transition:background 0.25s;}
+.ab-stat:hover{background:var(--dark2);}
+.ab-stat-num{font-family:var(--font-head);font-size:1.8rem;font-weight:700;color:var(--orange);transition:transform 0.3s;}
+.ab-stat:hover .ab-stat-num{transform:scale(1.18);}
+.ab-stat-label{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem;}
+
+/* CONTACT */
+.section-contact{padding:6rem 3rem;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem;}
+.cf-group{display:flex;flex-direction:column;gap:0.4rem;}
+.cf-group label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+.cf-group input,.cf-group select,.cf-group textarea{background:var(--dark2);border:1px solid var(--dark3);padding:0.8rem 1rem;font-family:var(--font-body);font-size:0.8rem;color:var(--white);outline:none;transition:border-color 0.3s,box-shadow 0.3s,transform 0.25s;-webkit-appearance:none;appearance:none;}
+.cf-group input:focus,.cf-group select:focus,.cf-group textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(245,91,0,0.12);transform:translateY(-2px);}
+.cf-group input::placeholder,.cf-group textarea::placeholder{color:var(--muted2);}
+.cf-group select option{background:var(--dark2);}
+.cf-group textarea{resize:none;height:110px;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.btn-submit{font-family:var(--font-head);font-size:1.1rem;font-weight:700;letter-spacing:0.08em;background:var(--orange);color:#fff;border:none;padding:1rem;cursor:pointer;transition:background 0.2s,transform 0.25s,box-shadow 0.25s;position:relative;overflow:hidden;}
+.btn-submit::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s;}
+.btn-submit:hover::before{left:100%;}
+.btn-submit:hover{background:var(--orange-light);transform:translateY(-2px);box-shadow:0 12px 30px rgba(245,91,0,0.35);}
+.contact-info{display:flex;flex-direction:column;gap:2rem;}
+.ci-label{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--orange);margin-bottom:0.4rem;}
+.ci-value{font-size:0.85rem;line-height:1.9;color:var(--white);}
+.ci-muted{font-size:0.75rem;line-height:1.9;color:var(--muted);}
+.whatsapp-btn{display:inline-flex;align-items:center;gap:0.7rem;background:#25D366;color:#fff;font-family:var(--font-head);font-size:1rem;font-weight:700;letter-spacing:0.05em;padding:0.9rem 2rem;text-decoration:none;transition:background 0.2s,transform 0.25s,box-shadow 0.25s;position:relative;overflow:hidden;}
+.whatsapp-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.12) 50%,transparent 70%);transform:translateX(-100%);transition:transform 0.5s;}
+.whatsapp-btn:hover::before{transform:translateX(100%);}
+.whatsapp-btn:hover{background:#1ebe5d;transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,0.3);}
+.cities-list{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;}
+.city-chip{font-size:0.65rem;letter-spacing:0.1em;background:var(--dark3);color:var(--muted);padding:0.3rem 0.8rem;transition:background 0.2s,color 0.2s,transform 0.25s;}
+.city-chip:hover{background:rgba(245,91,0,0.15);color:var(--orange);transform:translateY(-2px);}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid var(--dark3);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.footer-logo{font-family:var(--font-head);font-size:1.3rem;font-weight:700;letter-spacing:0.1em;}
+.footer-logo span{color:var(--orange);}
+.footer-copy{font-size:0.62rem;letter-spacing:0.1em;color:var(--muted);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:0.62rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--orange);}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(36px);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1);}
+.rv.on{opacity:1;transform:none;}
+.rv-l{opacity:0;transform:translateX(-42px);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1);}
+.rv-l.on{opacity:1;transform:none;}
+.rv-r{opacity:0;transform:translateX(42px);transition:opacity 0.85s cubic-bezier(0.16,1,0.3,1),transform 0.85s cubic-bezier(0.16,1,0.3,1);}
+.rv-r.on{opacity:1;transform:none;}
+.rv-s{opacity:0;transform:scale(0.88);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+.rv-s.on{opacity:1;transform:none;}
+/* stagger */
+.stg>*{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.stg.on>*:nth-child(1){opacity:1;transform:none;transition-delay:0s;}
+.stg.on>*:nth-child(2){opacity:1;transform:none;transition-delay:0.1s;}
+.stg.on>*:nth-child(3){opacity:1;transform:none;transition-delay:0.2s;}
+.stg.on>*:nth-child(4){opacity:1;transform:none;transition-delay:0.3s;}
+
+@keyframes flashIn{0%{opacity:0;}12%{opacity:1;}18%{opacity:0.4;}24%{opacity:1;}}
+body{animation:flashIn 0.5s ease both;}
+
+/* ═══════════════════════════════════════
+   AURORA ORB BACKGROUND
+═══════════════════════════════════════ */
+#bg-orbs{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  opacity:0.65;mix-blend-mode:screen;
+}
+#circuit-svg{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  width:100%;height:100%;opacity:0.04;overflow:visible;
+}
+
+/* ═══════════════════════════════════════
+   SECTION TINT OVERLAY (scroll-linked)
+═══════════════════════════════════════ */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 50% at var(--mx,50%) var(--my,50%),rgba(245,91,0,0.04),transparent 60%);
+  transition:opacity 0.6s;
+}
+
+/* ═══════════════════════════════════════
+   HERO TYPED CURSOR
+═══════════════════════════════════════ */
+.typed-cursor{
+  display:inline-block;width:3px;height:0.85em;background:var(--orange);
+  margin-left:3px;vertical-align:middle;
+  animation:cursorBlink 0.9s step-end infinite;
+}
+@keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* ═══════════════════════════════════════
+   FLOATING BADGE / BADGE PULSE RING
+═══════════════════════════════════════ */
+.hero-badge{position:relative;}
+.hero-badge::after{
+  content:'';position:absolute;inset:-4px;
+  border:1px solid rgba(245,91,0,0.25);
+  animation:badgeRing 3s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes badgeRing{0%,100%{transform:scale(1);opacity:0.4;}50%{transform:scale(1.06);opacity:0.9;}}
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL — CHAR LEVEL
+═══════════════════════════════════════ */
+.ch{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);
+  transition:opacity 0.5s cubic-bezier(0.16,1,0.3,1),transform 0.5s cubic-bezier(0.16,1,0.3,1);}
+.ch.on{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════
+   PC-ITEM STAGGER REVEAL
+═══════════════════════════════════════ */
+.pc-item{
+  opacity:0;transform:translateY(10px) scale(0.9);
+  transition:opacity 0.4s ease,transform 0.4s ease,background 0.25s,color 0.25s;
+}
+.clip-card.on .pc-item{opacity:1;transform:none;}
+.clip-card.on .pc-item:nth-child(1){transition-delay:0.55s;}
+.clip-card.on .pc-item:nth-child(2){transition-delay:0.65s;}
+.clip-card.on .pc-item:nth-child(3){transition-delay:0.75s;}
+.clip-card.on .pc-item:nth-child(4){transition-delay:0.85s;}
+.clip-card.on .pc-item:nth-child(5){transition-delay:0.95s;}
+.clip-card.on .pc-item:nth-child(6){transition-delay:1.05s;}
+
+/* ═══════════════════════════════════════
+   ANIMATED ORANGE CORNER BRACKETS ON CARDS
+═══════════════════════════════════════ */
+.part-card{isolation:isolate;}
+.part-card .corner{
+  position:absolute;width:16px;height:16px;
+  transition:width 0.35s cubic-bezier(0.16,1,0.3,1),height 0.35s cubic-bezier(0.16,1,0.3,1),opacity 0.35s;
+  opacity:0;
+}
+.part-card:hover .corner{width:22px;height:22px;opacity:1;}
+.corner.tl{top:0;left:0;border-top:2px solid var(--orange);border-left:2px solid var(--orange);}
+.corner.tr{top:0;right:0;border-top:2px solid var(--orange);border-right:2px solid var(--orange);}
+.corner.bl{bottom:0;left:0;border-bottom:2px solid var(--orange);border-left:2px solid var(--orange);}
+.corner.br{bottom:0;right:0;border-bottom:2px solid var(--orange);border-right:2px solid var(--orange);}
+
+/* ═══════════════════════════════════════
+   SECTION DIVIDER LINES (draw on scroll)
+═══════════════════════════════════════ */
+.draw-line{
+  height:1px;background:linear-gradient(90deg,var(--orange),var(--orange-light),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform 1.1s cubic-bezier(0.16,1,0.3,1);
+  margin:0 0 3rem 0;
+}
+.draw-line.on{transform:scaleX(1);}
+
+/* ═══════════════════════════════════════
+   ABOUT SECTION — animated stat bars
+═══════════════════════════════════════ */
+.ab-stat{position:relative;overflow:hidden;}
+.ab-stat::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--orange);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.ab-stat.fired::after{transform:scaleX(1);}
+
+/* ═══════════════════════════════════════
+   SECTION-PARTS — floating hex bg
+═══════════════════════════════════════ */
+.section-parts::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle at 15% 50%,rgba(245,91,0,0.04) 0%,transparent 35%),
+                   radial-gradient(circle at 85% 20%,rgba(245,91,0,0.03) 0%,transparent 30%);
+  animation:sectionGlow 8s ease-in-out infinite alternate;
+}
+@keyframes sectionGlow{from{opacity:0.6;}to{opacity:1;}}
+.section-parts>*{position:relative;z-index:1;}
+
+/* ═══════════════════════════════════════
+   BOLT SEPARATOR — electric spark travel
+═══════════════════════════════════════ */
+.bolt-line{position:relative;overflow:hidden;}
+.bolt-line::after{
+  content:'';position:absolute;top:0;left:-40%;width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(245,91,0,0.6),transparent);
+  animation:spark 3.5s ease-in-out infinite;
+}
+@keyframes spark{0%{left:-40%;}60%,100%{left:140%;}}
+
+/* ═══════════════════════════════════════
+   CONTACT FORM — input animated underline
+═══════════════════════════════════════ */
+.cf-group{position:relative;}
+.cf-group::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:linear-gradient(90deg,var(--orange),var(--orange-light));
+  transition:width 0.4s cubic-bezier(0.16,1,0.3,1);
+  pointer-events:none;
+}
+.cf-group:focus-within::after{width:100%;}
+
+/* ═══════════════════════════════════════
+   FOOTER — glow on hover
+═══════════════════════════════════════ */
+footer{transition:background 0.3s;}
+.footer-logo{
+  background:linear-gradient(90deg,var(--white),var(--orange),var(--white));
+  background-size:200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmerText 5s linear infinite;
+}
+.footer-logo span{-webkit-text-fill-color:var(--orange);}
+@keyframes shimmerText{0%{background-position:0%;}100%{background-position:200%;}}
+
+/* ═══════════════════════════════════════
+   CURSOR RING
+═══════════════════════════════════════ */
+#cursor-ring{
+  position:fixed;width:28px;height:28px;border:1.5px solid rgba(245,91,0,0.5);
+  border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+  transition:transform 0.06s linear,width 0.25s,height 0.25s,border-color 0.25s,opacity 0.3s;
+  opacity:0;will-change:left,top;
+}
+#cursor-ring.show{opacity:1;}
+#cursor-ring.big{width:48px;height:48px;border-color:var(--orange);}
+
+/* ═══════════════════════════════════════
+   SCROLL-FADE sections (alternate bg pulse)
+═══════════════════════════════════════ */
+.section-about{
+  background:var(--dark2);
+  background-image:radial-gradient(ellipse 70% 60% at 90% 50%,rgba(245,91,0,0.05),transparent 60%);
+}
+
+@media(max-width:900px){
+  #bg-orbs,#circuit-svg,#cursor-ring{display:none;}
+  .corner{display:none;}
+}
+  nav,nav.scrolled{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:6rem 1.5rem 3rem;}
+  .hero-right{display:none;}
+  .parts-grid{grid-template-columns:1fr;}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .cf-row{grid-template-columns:1fr;}
+  .section-parts,.section-about,.section-contact{padding:4rem 1.5rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+  #particles,#side-dots,.cursor-glow,.sc-marquee,.about-bg-word{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- AURORA ORBS BACKGROUND -->
+<canvas id="bg-orbs"></canvas>
+<!-- CIRCUIT OVERLAY -->
+<svg id="circuit-svg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"></svg>
+
+<div id="scroll-bar"></div>
+<div id="side-dots">
+  <div class="sdot on" data-s="hero"></div>
+  <div class="sdot" data-s="parts"></div>
+  <div class="sdot" data-s="about"></div>
+  <div class="sdot" data-s="contact"></div>
+</div>
+<canvas id="particles"></canvas>
+<div id="cursor-ring"></div>
+<div class="cursor-glow" id="cg"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">JSR</div>
+    <div><div class="logo-text">JSR <span>EV</span> TECH</div><div class="logo-sub">E-Rickshaw Spare Parts</div></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#parts" data-n="parts">Parts</a></li>
+    <li><a href="#about" data-n="about">About</a></li>
+    <li><a href="#contact" data-n="contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get Quote</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-grid" id="hg"></div>
+  <div class="hero-left" id="hl">
+    <div class="hero-badge"><span class="badge-dot"></span> Trusted Across India</div>
+    <h1 class="hero-title">
+      <span class="title-line">QUALITY PARTS</span>
+      <span class="title-line">FOR YOUR <span>E-RICKSHAW</span></span>
+    </h1>
+    <p class="hero-desc">JSR EV TECH is your one-stop supplier for genuine e-rickshaw spare parts — batteries, motors, tyres, chargers, and more. Fast delivery, competitive prices, and expert support across India.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-main">Get a Free Quote</a>
+      <a href="#parts" class="btn-outline">View Parts</a>
+    </div>
+    <div class="hero-trust stg" id="ts">
+      <div class="trust-item"><div class="trust-num" data-t="5000" data-sx="+">0</div><div class="trust-label">Parts Sold</div></div>
+      <div class="trust-item"><div class="trust-num" data-t="50" data-sx="+">0</div><div class="trust-label">Dealers</div></div>
+      <div class="trust-item"><div class="trust-num" data-t="15" data-sx="+">0</div><div class="trust-label">States</div></div>
+      <div class="trust-item"><div class="trust-num" data-t="100" data-sx="%">0</div><div class="trust-label">Genuine</div></div>
+    </div>
+  </div>
+  <div class="hero-right" id="hr">
+    <div class="hero-visual">
+      <div class="parts-preview">
+        <div class="part-preview-card"><div class="part-icon">🔋</div><div class="part-name">BATTERIES</div><div class="part-count">48V / 60V / 72V</div></div>
+        <div class="part-preview-card"><div class="part-icon">⚙️</div><div class="part-name">MOTORS</div><div class="part-count">1000W – 3500W</div></div>
+        <div class="part-preview-card"><div class="part-icon">🛞</div><div class="part-name">TYRES</div><div class="part-count">All Sizes</div></div>
+        <div class="part-preview-card"><div class="part-icon">⚡</div><div class="part-name">CHARGERS</div><div class="part-count">48V / 60V</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <span class="ticker-inner">✦ GENUINE PARTS &nbsp;&nbsp;&nbsp; FAST DELIVERY &nbsp;&nbsp;&nbsp; BATTERIES &nbsp;&nbsp;&nbsp; MOTORS &nbsp;&nbsp;&nbsp; CHARGERS &nbsp;&nbsp;&nbsp; TYRES &amp; WHEELS &nbsp;&nbsp;&nbsp; CONTROLLERS &nbsp;&nbsp;&nbsp; BULK ORDERS WELCOME &nbsp;&nbsp;&nbsp; PAN INDIA SHIPPING &nbsp;&nbsp;&nbsp; ✦ GENUINE PARTS &nbsp;&nbsp;&nbsp; FAST DELIVERY &nbsp;&nbsp;&nbsp; BATTERIES &nbsp;&nbsp;&nbsp; MOTORS &nbsp;&nbsp;&nbsp; CHARGERS &nbsp;&nbsp;&nbsp; TYRES &amp; WHEELS &nbsp;&nbsp;&nbsp; CONTROLLERS &nbsp;&nbsp;&nbsp; BULK ORDERS WELCOME &nbsp;&nbsp;&nbsp; PAN INDIA SHIPPING &nbsp;&nbsp;&nbsp;</span>
+</div>
+
+<!-- SCROLL MARQUEE 1 -->
+<div class="sc-marquee"><div class="sc-marquee-row" id="mr1">
+  <span class="sc-word">BATTERIES</span><span class="sc-word hl">✦</span><span class="sc-word">MOTORS</span><span class="sc-word hl">✦</span><span class="sc-word">TYRES</span><span class="sc-word hl">✦</span><span class="sc-word">CHARGERS</span><span class="sc-word hl">✦</span><span class="sc-word">CONTROLLERS</span><span class="sc-word hl">✦</span><span class="sc-word">BATTERIES</span><span class="sc-word hl">✦</span><span class="sc-word">MOTORS</span><span class="sc-word hl">✦</span><span class="sc-word">TYRES</span><span class="sc-word hl">✦</span><span class="sc-word">CHARGERS</span><span class="sc-word hl">✦</span><span class="sc-word">CONTROLLERS</span><span class="sc-word hl">✦</span>
+</div></div>
+
+<!-- <section class="section-parts" id="parts">
+  <div class="section-tag rv" id="ptag">Our Products</div>
+  <div class="draw-line rv"></div>
+  <h2 class="section-title rv" id="ptitle">SPARE PARTS <span>CATALOGUE</span></h2>
+  <div class="parts-grid">
+    <div class="part-card clip-card"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div class="pc-top"><div class="pc-icon">🔋</div><div class="pc-tag">In Stock</div></div><div class="pc-title">BATTERIES</div><div class="pc-desc">High-performance lead-acid and lithium batteries for all e-rickshaw models. Long cycle life, heat-resistant, and optimised for Indian road conditions.</div><div class="pc-items"><span class="pc-item">48V 100Ah</span><span class="pc-item">48V Lead Acid</span><span class="pc-item">60V Lithium</span><span class="pc-item">Tubular Battery</span><span class="pc-item">GEL Battery</span></div><a href="#contact" class="pc-link">Enquire Now →</a></div>
+    <div class="part-card clip-card" style="transition-delay:0.13s;"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div class="pc-top"><div class="pc-icon">⚙️</div><div class="pc-tag">In Stock</div></div><div class="pc-title">MOTORS &amp; CONTROLLERS</div><div class="pc-desc">BLDC hub motors and programmable controllers built for torque, efficiency, and durability. Compatible with all major e-rickshaw brands.</div><div class="pc-items"><span class="pc-item">1000W BLDC</span><span class="pc-item">1200W Motor</span><span class="pc-item">1500W Motor</span><span class="pc-item">1800W Motor</span><span class="pc-item">48V Controller</span><span class="pc-item">60V Controller</span></div><a href="#contact" class="pc-link">Enquire Now →</a></div>
+    <div class="part-card clip-card" style="transition-delay:0.26s;"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div class="pc-top"><div class="pc-icon">🛞</div><div class="pc-tag">In Stock</div></div><div class="pc-title">TYRES &amp; WHEELS</div><div class="pc-desc">Puncture-resistant tyres and durable wheel rims engineered for India's varied terrain. Available in all standard e-rickshaw sizes.</div><div class="pc-items"><span class="pc-item">3.75-12 Tube Tyre</span><span class="pc-item">4.00-12 Tyre</span><span class="pc-item">Tube Tyre</span><span class="pc-item">Alloy Rim</span><span class="pc-item">Tube Set</span></div><a href="#contact" class="pc-link">Enquire Now →</a></div>
+    <div class="part-card clip-card" style="transition-delay:0.39s;"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><div class="pc-top"><div class="pc-icon">⚡</div><div class="pc-tag">In Stock</div></div><div class="pc-title">CHARGERS &amp; ELECTRICAL</div><div class="pc-desc">Smart chargers with auto cut-off, wiring harnesses, switches, indicators, and all electrical components for complete e-rickshaw maintenance.</div><div class="pc-items"><span class="pc-item">48V 10A Charger</span><span class="pc-item">60V 15A Charger</span><span class="pc-item">Wiring Harness</span><span class="pc-item">Indicators</span><span class="pc-item">Horn &amp; Switch</span></div><a href="#contact" class="pc-link">Enquire Now →</a></div>
+  </div>
+</section> -->
+
+<!-- SCROLL MARQUEE 2 (reversed) -->
+<div class="sc-marquee"><div class="sc-marquee-row" id="mr2">
+  <span class="sc-word">JSR EV TECH</span><span class="sc-word hl">⚡</span><span class="sc-word">PAN INDIA</span><span class="sc-word hl">⚡</span><span class="sc-word">BULK ORDERS</span><span class="sc-word hl">⚡</span><span class="sc-word">GENUINE PARTS</span><span class="sc-word hl">⚡</span><span class="sc-word">FAST DELIVERY</span><span class="sc-word hl">⚡</span><span class="sc-word">JSR EV TECH</span><span class="sc-word hl">⚡</span><span class="sc-word">PAN INDIA</span><span class="sc-word hl">⚡</span><span class="sc-word">BULK ORDERS</span><span class="sc-word hl">⚡</span><span class="sc-word">GENUINE PARTS</span><span class="sc-word hl">⚡</span><span class="sc-word">FAST DELIVERY</span><span class="sc-word hl">⚡</span>
+</div></div>
+
+<div class="bolt-sep"><div class="bolt-line"></div><span class="bolt-icon">⚡</span><div class="bolt-line"></div></div>
+
+<section class="section-about" id="about">
+  <div class="about-bg-word" id="abgw">E-RICKSHAW</div>
+  <div class="about-grid">
+    <div class="about-left rv-l">
+      <div class="section-tag rv" id="atag">About JSR EV TECH</div>
+      <div class="draw-line rv"></div>
+      <h2 class="section-title rv" id="atitle">RELIABLE PARTS,<br><span>TRUSTED NAME</span></h2>
+      <p class="about-body">JSR EV TECH is a dedicated supplier of e-rickshaw spare parts, serving dealers, mechanics, and fleet operators across India. We stock genuine, tested components that keep your e-rickshaw running safely and efficiently.</p>
+      <p class="about-body">From a single battery replacement to bulk orders for a fleet, we provide fast dispatch, competitive pricing, and expert guidance on the right parts for every model.</p>
+      <div class="about-features stg" id="af">
+        <div class="af-item"><div class="af-title">Genuine Parts</div><div class="af-desc">100% authentic, quality-tested components.</div></div>
+        <div class="af-item"><div class="af-title">Pan India Delivery</div><div class="af-desc">Fast shipping to all major cities and towns.</div></div>
+        <div class="af-item"><div class="af-title">Bulk Discounts</div><div class="af-desc">Special pricing for dealers and fleet orders.</div></div>
+        <div class="af-item"><div class="af-title">Expert Support</div><div class="af-desc">Technical help to choose the right part.</div></div>
+      </div>
+    </div>
+    <div class="about-right rv-r">
+      <div class="about-banner rv-s">
+        <h3>E-RICKSHAW PARTS<br>AT YOUR DOORSTEP</h3>
+        <p>Call or WhatsApp us for same-day quotes on any part.</p>
+      </div>
+      <div class="about-stat-row">
+        <div class="ab-stat"><div class="ab-stat-num" data-t="5000" data-sx="+">0</div><div class="ab-stat-label">Parts Sold</div></div>
+        <div class="ab-stat"><div class="ab-stat-num" data-t="50" data-sx="+">0</div><div class="ab-stat-label">Dealers</div></div>
+        <div class="ab-stat"><div class="ab-stat-num" data-t="15" data-sx="+">0</div><div class="ab-stat-label">States</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-contact" id="contact">
+  <div class="section-tag rv" id="ctag">Get In Touch</div>
+  <div class="draw-line rv"></div>
+  <h2 class="section-title rv" id="ctitle" style="margin-bottom:2.5rem;">REQUEST A <span>QUOTE</span></h2>
+  <div class="contact-grid">
+    <div class="rv-l">
+      <!-- <form class="contact-form" onsubmit="doSubmit(event)"> -->
+        <form action="https://formspree.io/f/xvzbzekj" method="POST">
+        <div class="cf-row"><div class="cf-group"><label>Your Name</label><input type="text" placeholder="Ramesh Kumar"/></div><div class="cf-group"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210"/></div></div>
+        <div class="cf-group"><label>City / State</label><input type="text" placeholder="e.g. Lucknow, UP"/></div>
+        <div class="cf-group"><label>Part Required</label><select><option value="" disabled selected>Select part category</option><option>Batteries</option><option>Motors &amp; Controllers</option><option>Tyres &amp; Wheels</option><option>Chargers &amp; Electrical</option><option>Multiple Parts</option></select></div>
+        <div class="cf-group"><label>Message / Quantity</label><textarea placeholder="e.g. Need 48V 100Ah batteries x 10, please quote bulk price..."></textarea></div>
+        <button type="submit" class="btn-submit">SEND ENQUIRY →</button>
+      </form>
+    </div>
+    <div class="contact-info rv-r">
+      <div><div class="ci-label">Call / WhatsApp</div><div class="ci-value">+91 9871646392</div><div class="ci-value">+91 9990360094</div><div class="ci-value">+91 9990120067</div><br/><a href="https://wa.me/919990120067" class="whatsapp-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chat on WhatsApp</a></div>
+      <div><div class="ci-label">Email</div><div class="ci-value"><h4>JSREVTECH@gmail.com</h4></div></div>
+ <!-- <div> 
+  <a href="JSREVTECH@gmail.com" type="email">JSREVTECH@gmail.com</a>
+      </div> -->
+      <div><div class="ci-label">Office Address</div><div class="ci-muted">JSR EV TECH<br/>Shop No 3, B3/17, Sector 18<br/>ROHINI, NEW DELHI —110085</div></div>
+      <div><div class="ci-label">We Deliver To</div><div class="cities-list"><span class="city-chip">Delhi</span><span class="city-chip">Lucknow</span><span class="city-chip">Agra</span><span class="city-chip">Kanpur</span><span class="city-chip">Patna</span><span class="city-chip">Kolkata</span><span class="city-chip">Varanasi</span><span class="city-chip">Jaipur</span><span class="city-chip">&amp; More</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">JSR <span>EV</span> TECH</div>
+  <div class="footer-copy">© 2025 JSR EV TECH. All rights reserved. | E-Rickshaw Spare Parts</div>
+  <div class="footer-links"><a href="#parts">Parts</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── CURSOR ── */
+const cg = document.getElementById('cg');
+let mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function loop(){cg.style.left=mx+'px';cg.style.top=my+'px';requestAnimationFrame(loop);})();
+
+/* ── PARTICLES ── */
+const cvs=document.getElementById('particles'),ctx=cvs.getContext('2d');
+let W,H,pts=[];
+function rsz(){W=cvs.width=innerWidth;H=cvs.height=innerHeight;}
+rsz();addEventListener('resize',rsz);
+class P{constructor(){this.r();}r(){this.x=Math.random()*W;this.y=Math.random()*H;this.s=Math.random()*1.4+0.3;this.vx=(Math.random()-.5)*.35;this.vy=(Math.random()-.5)*.35;this.o=Math.random()*.35+.05;this.c=Math.random()>.72?'#F55B00':'#F4F0E8';}u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.r();}d(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle=this.c;ctx.globalAlpha=this.o;ctx.fill();}}
+for(let i=0;i<90;i++)pts.push(new P());
+function drawPts(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.u();p.d();});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<85){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle='#F55B00';ctx.globalAlpha=(1-d/85)*.07;ctx.lineWidth=.5;ctx.stroke();}}ctx.globalAlpha=1;}
+
+/* ── SECTIONS ── */
+const SECS=['hero','parts','about','contact'];
+const navEl=document.getElementById('nav');
+const sideDots=document.getElementById('side-dots');
+let lastY=0,vel=0;
+
+/* ── SCROLL-LINKED MARQUEE ── */
+const mr1=document.getElementById('mr1'),mr2=document.getElementById('mr2');
+let x1=0,x2=0;
+function updateMarquees(){
+  const spd=Math.min(Math.abs(vel)*.5,10);
+  const base=1.2;
+  const halfW1=mr1?mr1.scrollWidth/2:5000;
+  const halfW2=mr2?mr2.scrollWidth/2:5000;
+  x1-=(base+spd);if(x1<=-halfW1)x1+=halfW1;
+  x2+=(base+spd*.7);if(x2>=halfW2)x2-=halfW2;
+  if(mr1)mr1.style.transform=`translateX(${x1}px)`;
+  if(mr2)mr2.style.transform=`translateX(${x2}px)`;
+}
+
+/* ── PARALLAX ── */
+const heroLeft=document.getElementById('hl'),heroRight=document.getElementById('hr'),heroGrid=document.getElementById('hg');
+const abgw=document.getElementById('abgw'),aboutEl=document.getElementById('about');
+function updateParallax(sy){
+  if(heroLeft)heroLeft.style.transform=`translateY(${sy*.18}px)`;
+  if(heroRight)heroRight.style.transform=`translateY(${sy*.1}px)`;
+  if(heroGrid)heroGrid.style.transform=`translateY(${sy*.06}px)`;
+  if(abgw&&aboutEl){const r=aboutEl.getBoundingClientRect();abgw.style.transform=`translateY(calc(-50% + ${-r.top*.22}px))`;}
+}
+
+/* ── PROGRESS BAR ── */
+const scrollBar=document.getElementById('scroll-bar');
+function updateBar(sy){const max=document.documentElement.scrollHeight-innerHeight;scrollBar.style.width=(sy/max*100)+'%';}
+
+/* ── NAV + SIDE ACTIVE ── */
+function updateActive(sy){
+  navEl.classList.toggle('scrolled',sy>60);
+  sideDots.classList.toggle('show',sy>150);
+  let cur='hero';
+  SECS.forEach(id=>{const el=document.getElementById(id);if(el&&sy>=el.offsetTop-220)cur=id;});
+  document.querySelectorAll('[data-n]').forEach(a=>a.classList.toggle('on',a.dataset.n===cur));
+  document.querySelectorAll('.sdot').forEach(d=>d.classList.toggle('on',d.dataset.s===cur));
+}
+
+/* ── WORD-BY-WORD TITLE WRAP ── */
+function wrapTitle(el){
+  if(!el||el._wrapped)return;el._wrapped=true;
+  el.innerHTML=el.innerHTML.replace(/(<[^>]+>)|([^\s<]+)/g,(m,tag,word)=>tag?tag:`<span class="wr">${word}&nbsp;</span>`);
+}
+['ptitle','atitle','ctitle'].forEach(id=>wrapTitle(document.getElementById(id)));
+
+/* ── COUNTER ── */
+function runCount(el){
+  if(el._done)return;el._done=true;
+  const tgt=+el.dataset.t,sfx=el.dataset.sx||'',dur=1800,t0=performance.now();
+  (function s(now){const p=Math.min((now-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(e*tgt).toLocaleString()+sfx;if(p<1)requestAnimationFrame(s);})(t0);
+}
+
+/* ── INTERSECTION OBSERVER (scroll-in AND scroll-out) ── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    const el=e.target;
+    if(e.isIntersecting){
+      el.classList.add('on');
+      if(el.classList.contains('section-tag'))el.classList.add('tag-on');
+      if(el.classList.contains('section-title'))el.querySelectorAll('.wr').forEach((w,i)=>setTimeout(()=>w.classList.add('on'),i*75));
+      el.querySelectorAll('[data-t]').forEach(runCount);
+    } else {
+      el.classList.remove('on');
+      if(el.classList.contains('section-tag'))el.classList.remove('tag-on');
+      if(el.classList.contains('section-title'))el.querySelectorAll('.wr').forEach(w=>w.classList.remove('on'));
+      /* reset counters so they replay on next scroll-in */
+      el.querySelectorAll('[data-t]').forEach(c=>{c._done=false;});
+    }
+  });
+},{threshold:0.1});
+
+document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,.stg,.clip-card,.section-tag,.section-title').forEach(el=>io.observe(el));
+
+// trust stats in hero (already visible at load, trigger after small delay)
+setTimeout(()=>{const ts=document.getElementById('ts');if(ts){ts.classList.add('on');ts.querySelectorAll('[data-t]').forEach(runCount);}},1400);
+
+/* ── MASTER LOOP ── */
+function loop(){
+  const sy=scrollY;
+  vel=sy-lastY;lastY=sy;
+  updateBar(sy);
+  updateActive(sy);
+  updateParallax(sy);
+  updateMarquees();
+  drawPts();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* ── CARD 3D TILT ── */
+document.querySelectorAll('.part-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`translateY(-6px) perspective(700px) rotateX(${-py*7}deg) rotateY(${px*7}deg)`;
+  });
+  c.addEventListener('mouseleave',()=>c.style.transform='');
+});
+
+/* ── MAGNETIC BTNS ── */
+document.querySelectorAll('.btn-main,.btn-submit,.whatsapp-btn').forEach(b=>{
+  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.18}px) translateY(-2px)`;});
+  b.addEventListener('mouseleave',()=>b.style.transform='');
+});
+
+/* ══════════════════════════════════════
+   CURSOR RING
+══════════════════════════════════════ */
+const ring=document.getElementById('cursor-ring');
+let rx=0,ry=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;
+  ring.classList.add('show');});
+document.addEventListener('mouseleave',()=>ring.classList.remove('show'));
+document.querySelectorAll('a,button,.part-card,.sdot,.city-chip').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('big'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
+});
+(function ringLoop(){
+  rx+=(tx-rx)*0.12; ry+=(ty-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(ringLoop);
+})();
+
+/* ══════════════════════════════════════
+   AURORA ORB BACKGROUND
+══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('bg-orbs');
+  if(!c)return;
+  const cx=c.getContext('2d');
+  let W,H;
+  function rs(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  rs();addEventListener('resize',rs);
+  const orbs=[
+    {x:0.15,y:0.3,r:0.38,col:'245,91,0',sp:0.00012,phase:0},
+    {x:0.75,y:0.6,r:0.42,col:'255,122,47',sp:0.00009,phase:2.1},
+    {x:0.5, y:0.1,r:0.3, col:'245,91,0', sp:0.00015,phase:4.2},
+    {x:0.85,y:0.15,r:0.25,col:'255,180,80',sp:0.0001,phase:1.0},
+    {x:0.2, y:0.8,r:0.3, col:'200,60,0', sp:0.00013,phase:3.3},
+  ];
+  function drawOrbs(t){
+    cx.clearRect(0,0,W,H);
+    orbs.forEach(o=>{
+      const drift=Math.sin(t*o.sp*1000+o.phase);
+      const ox=(o.x+drift*0.08)*W;
+      const oy=(o.y+Math.cos(t*o.sp*800+o.phase)*0.06)*H;
+      const rad=o.r*Math.min(W,H);
+      const g=cx.createRadialGradient(ox,oy,0,ox,oy,rad);
+      g.addColorStop(0,`rgba(${o.col},0.12)`);
+      g.addColorStop(0.5,`rgba(${o.col},0.04)`);
+      g.addColorStop(1,`rgba(${o.col},0)`);
+      cx.fillStyle=g;
+      cx.beginPath();cx.arc(ox,oy,rad,0,Math.PI*2);cx.fill();
+    });
+  }
+  let last=0;
+  function orbLoop(t){last=t;drawOrbs(t);requestAnimationFrame(orbLoop);}
+  requestAnimationFrame(orbLoop);
+})();
+
+/* ══════════════════════════════════════
+   CIRCUIT SVG BACKGROUND
+══════════════════════════════════════ */
+(function(){
+  const svg=document.getElementById('circuit-svg');
+  if(!svg)return;
+  const N=18;
+  let lines=[];
+  function rebuild(){
+    svg.innerHTML='';lines=[];
+    const W=innerWidth,H=innerHeight;
+    const pts=Array.from({length:N},()=>({x:Math.random()*W,y:Math.random()*H}));
+    pts.forEach((p,i)=>{
+      const nearest=pts.map((q,j)=>({j,d:Math.hypot(p.x-q.x,p.y-q.y)}))
+        .filter(e=>e.j!==i).sort((a,b)=>a.d-b.d).slice(0,2);
+      nearest.forEach(e=>{
+        const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1',p.x);line.setAttribute('y1',p.y);
+        line.setAttribute('x2',pts[e.j].x);line.setAttribute('y2',pts[e.j].y);
+        line.setAttribute('stroke','#F55B00');line.setAttribute('stroke-width','0.8');
+        svg.appendChild(line);lines.push(line);
+      });
+      const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);
+      dot.setAttribute('r','2');dot.setAttribute('fill','#F55B00');
+      svg.appendChild(dot);
+    });
+  }
+  rebuild();
+  let rto;
+  addEventListener('resize',()=>{clearTimeout(rto);rto=setTimeout(rebuild,400);});
+})();
+
+/* ══════════════════════════════════════
+   TYPED TEXT ON HERO SUBTITLE
+══════════════════════════════════════ */
+(function(){
+  const desc=document.querySelector('.hero-desc');
+  if(!desc)return;
+  const original=desc.textContent.trim();
+  desc.textContent='';
+  const cur=document.createElement('span');cur.className='typed-cursor';
+  desc.appendChild(cur);
+  let i=0;
+  function type(){
+    if(i<original.length){
+      cur.before(document.createTextNode(original[i++]));
+      setTimeout(type,i<30?22:16);
+    } else {
+      setTimeout(()=>cur.style.display='none',2000);
+    }
+  }
+  setTimeout(type,1100);
+})();
+
+/* ══════════════════════════════════════
+   STAT BAR FIRE (about section)
+══════════════════════════════════════ */
+const statIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('fired');}
+    else{e.target.classList.remove('fired');}
+  });
+},{threshold:0.5});
+document.querySelectorAll('.ab-stat').forEach(el=>statIO.observe(el));
+
+/* ══════════════════════════════════════
+   DRAW-LINE OBSERVER
+══════════════════════════════════════ */
+const dlIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('on');}
+    else{e.target.classList.remove('on');}
+  });
+},{threshold:0.2});
+document.querySelectorAll('.draw-line').forEach(el=>dlIO.observe(el));
+
+/* ══════════════════════════════════════
+   SCROLL-LINKED BG TINT (body CSS var)
+══════════════════════════════════════ */
+function updateBgTint(){
+  const sy=scrollY;
+  const max=document.documentElement.scrollHeight-innerHeight;
+  const pct=(sy/max)*100;
+  // shift the radial hotspot horizontally as you scroll
+  document.body.style.setProperty('--mx',(40+pct*0.2)+'%');
+  document.body.style.setProperty('--my',(20+pct*0.6)+'%');
+}
+addEventListener('scroll',updateBgTint,{passive:true});
+updateBgTint();
+
+/* ══════════════════════════════════════
+   CHAR-LEVEL REVEAL for hero subtitle line
+══════════════════════════════════════ */
+// wrap .about-body paragraphs words for stagger
+document.querySelectorAll('.about-body').forEach((p,pi)=>{
+  const words=p.textContent.split(' ');
+  p.innerHTML=words.map((w,i)=>`<span class="ch" style="transition-delay:${(i*0.04+pi*0.15).toFixed(2)}s">${w}</span>`).join(' ');
+});
+const chIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.ch').forEach(ch=>ch.classList.add('on'));
+    } else {
+      e.target.querySelectorAll('.ch').forEach(ch=>ch.classList.remove('on'));
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.about-body').forEach(el=>chIO.observe(el));
+
+/* ══════════════════════════════════════
+   SECTION SCROLL-DEPTH PARALLAX (extra)
+══════════════════════════════════════ */
+const sectionParts=document.getElementById('parts');
+const sectionContact=document.querySelector('.section-contact');
+function updateSectionParallax(sy){
+  if(sectionParts){
+    const r=sectionParts.getBoundingClientRect();
+    const bg=sectionParts.style;
+    bg.backgroundPositionY=`${r.top*0.08}px`;
+  }
+}
+// patch into master loop — extend updateParallax
+const _origParallax=updateParallax;
+// already called in master loop — override with extended version
+// (reassign the function reference used by the loop)
+
+document.querySelectorAll('.sdot').forEach(d=>d.addEventListener('click',()=>document.getElementById(d.dataset.s)?.scrollIntoView({behavior:'smooth'})));
+
+/* ── FORM ── */
+function doSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.btn-submit');
+  const form=e.target;
+  btn.textContent='SENDING…';btn.disabled=true;btn.style.background='var(--dark3)';
+
+  // Replace YOUR_FORM_ID with your Formspree ID, or swap for your own backend endpoint
+  const FORM_ENDPOINT='https://formspree.io/f/YOUR_FORM_ID';
+
+  fetch(FORM_ENDPOINT,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+    .then(r=>{
+      if(r.ok){
+        btn.textContent='ENQUIRY SENT ✓';btn.style.background='#1DB954';btn.style.boxShadow='0 10px 28px rgba(29,185,84,.35)';
+        form.reset();
+        setTimeout(()=>{btn.textContent='SEND ENQUIRY →';btn.style.background='';btn.style.boxShadow='';btn.disabled=false;},3000);
+      } else {throw new Error('Server error');}
+    })
+    .catch(()=>{
+      btn.textContent='FAILED — TRY AGAIN';btn.style.background='#c0392b';btn.disabled=false;
+      setTimeout(()=>{btn.textContent='SEND ENQUIRY →';btn.style.background='';},3000);
+    });
+}
+</script>
+</body>
+</html>
