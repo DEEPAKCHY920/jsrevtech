@@ -4,8 +4,15 @@ const nodemailer = require("nodemailer");
 const path = require("path");
 
 const app = express();
+
+// ================= MIDDLEWARE =================
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+// ✅ ROOT ROUTE FIX (IMPORTANT)
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "email.html"));
+});
 
 // ================= STORE =================
 const otpStore = new Map();
@@ -30,6 +37,10 @@ app.post("/send-otp", async (req, res) => {
   const { email } = req.body;
   const now = Date.now();
 
+  if (!email) {
+    return res.json({ success: false, message: "Email required ❌" });
+  }
+
   if (cooldownStore.get(email) > now) {
     return res.json({
       success: false,
@@ -40,8 +51,8 @@ app.post("/send-otp", async (req, res) => {
   const otp = generateOTP();
 
   otpStore.set(email, otp);
-  expiryStore.set(email, now + 5 * 60 * 1000);
-  cooldownStore.set(email, now + 30 * 1000);
+  expiryStore.set(email, now + 5 * 60 * 1000); // 5 min expiry
+  cooldownStore.set(email, now + 30 * 1000); // 30 sec cooldown
 
   console.log("OTP:", otp);
 
@@ -103,7 +114,7 @@ app.post("/send-otp", async (req, res) => {
           <tr>
             <td align="center">
               <p style="font-size:14px;opacity:0.7;">
-                Expires in 30 second
+                Expires in 5 minutes
               </p>
               <p style="font-size:12px;opacity:0.5;">
                 Do not share this OTP
@@ -130,7 +141,7 @@ app.post("/send-otp", async (req, res) => {
 
     res.json({ success: true, message: "OTP sent 🚀" });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.json({ success: false, message: "Email failed ❌" });
   }
 });
@@ -161,7 +172,9 @@ app.post("/verify-otp", (req, res) => {
   res.json({ success: false, message: "Invalid OTP ❌" });
 });
 
-// ================= START =================
-app.listen(process.env.PORT, () =>
-  console.log(`🚀 Running: http://localhost:${process.env.PORT}`)
+// ================= START SERVER =================
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on port ${PORT}`)
 );
