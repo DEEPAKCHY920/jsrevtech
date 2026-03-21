@@ -58,12 +58,80 @@ app.post("/send-otp", async (req, res) => {
         to: [{ email }],
         subject: "🔐 Your OTP Code - JSR EV TECH",
         htmlContent: `
-          <div style="font-family:Arial;padding:20px">
-            <h2>JSR EV TECH</h2>
-            <p>Your OTP is:</p>
-            <h1 style="color:#ff6600">${otp}</h1>
-            <p>Valid for 5 minutes</p>
-          </div>
+         <div style="margin:0;padding:0;background:#0b0b0b;font-family:Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+
+        <table width="420" cellpadding="0" cellspacing="0"
+        style="background:#111;border-radius:14px;padding:30px;
+        border:1px solid rgba(255,102,0,0.2);color:#fff;">
+
+          <tr>
+            <td align="center">
+              <h2 style="color:#ff6600;">JSR EV TECH</h2>
+              <p style="opacity:0.7;font-size:13px;">
+                Secure Login Verification
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <hr style="border:none;height:1px;background:#222;margin:20px 0;">
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center">
+              <p style="font-size:15px;">
+                Use this OTP to login:
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding:20px 0;">
+              <div style="
+                font-size:32px;
+                letter-spacing:10px;
+                color:#ff6600;
+                background:#0b0b0b;
+                padding:15px 30px;
+                border-radius:10px;
+                border:1px solid #333;
+              ">
+                ${otp}
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center">
+              <p style="font-size:14px;opacity:0.7;">
+                Expires in 30 second
+              </p>
+              <p style="font-size:12px;opacity:0.5;">
+                Do not share this OTP
+              </p>
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding-top:20px;">
+              <p style="font-size:11px;opacity:0.4;">
+                © 2026 JSR EV TECH
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
         `,
       },
       {
