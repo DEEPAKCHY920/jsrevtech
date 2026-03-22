@@ -53,7 +53,7 @@ app.post("/send-otp", async (req, res) => {
       {
         sender: {
           name: "JSR EV TECH",
-          email: "jsrevtech@gmail.com", // ⚠️ must be verified in Brevo
+          email: "otp@jsrevtech.in", // ⚠️ must be verified in Brevo
         },
         to: [{ email }],
         subject: "🔐 Your OTP Code - JSR EV TECH",
